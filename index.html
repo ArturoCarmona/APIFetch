@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>API Fetch</title>
+</head>
+<body>
+    <!-- Titulo y Boton-->
+    <section class="container text-center">
+        <div class="row justify-content-center my-5">
+            <div class="col col-12">
+                <h1 class="text-center">API Fetch</h1>
+                <button type="button" class="col-4 btn btn-dark my-3" onclick="getUsers()">Obtener usuarios</button>
+            </div>
+        </div>        
+    <!--Contenido usuarios-->
+        
+        <table class="table align-middle table-bordered border-dark">
+            <thead class="table-dark text-center" id="cab">
+            </thead>
+            <tbody class="table-light " id="tabla">
+            </tbody>
+        </table>
+    </section>
+
+    <script src="./scripts/scritp.js"></script>
+</body>
+</html>
