@@ -1,5 +1,15 @@
 url="https://reqres.in/api/users?delay=3";
 
+//Progreso
+function progress(){
+    p = `<div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only"></span>
+            </div>
+        </div>`
+    document.getElementById("cab").innerHTML = p;
+}
+
 //Verificar si ya existe LocalStorage:
 //Se activa funcion Fetch para conseguir datos
 function getUsers(){
@@ -12,6 +22,7 @@ function getUsers(){
 
 //Solicitud Fetch
 function solicitudFetch(){
+    progress()
     fetch(url)
     .then(response => response.json())
     .then(conversion => {
@@ -21,21 +32,50 @@ function solicitudFetch(){
     }
 //Mostrar datos en pantalla
 function showData(data){
-    let category = `<tr><th>ID</th>
-    <th>EMAIL</th>
-    <th>FIRST NAME</th>
-    <th>LAST NAME</th>
-    <th>AVATAR</th></tr>`;
-    let tab = "";
-    for (i=0; i < data.length ; i++){
-        tab += `<tr><td>${data[i].id}</td>
-        <td>${data[i].email}</td>
-        <td>${data[i].first_name}</td>
-        <td>${data[i].last_name}</td>
-        <td><img src=${data[i].avatar}></td></tr>`
+    showCategory(Object.keys(data[0]));
+    showUsers(data);
+}
+
+function showCategory(data){
+    let category =""; 
+    for(i=0; i<data.length; i++){
+        category +=`<div class="col-lg-2 col-xs-12 text-uppercase">
+                        ${data[i]}
+                    </div>`;
     }
+    category = `<div class="row" style="background-color: black; color:white;">
+                        ${category}
+                    </div>`;
     document.getElementById("cab").innerHTML = category;
-    document.getElementById("tabla").innerHTML = tab;
+}
+
+let color="";
+function showUsers(data){
+    let body ="";
+    for(i = 0; i < data.length; i++){
+        let cyan="cyan";
+        let white="white";
+        color = (i === 0 ? cyan :( i=== 1 ? white :(i === 2 ? cyan :(i ===3 ? white :(i=== 4 ? cyan : white)))));
+        console.log(color)
+        body += `<div class="row justify-content-center text-center" style="background-color:${color};">
+                    <div class="col-lg-2 col-xs-12">
+                        <p class="text-center">${data[i].id}</p>
+                    </div>
+                    <div class="col-lg-2 col-xs-12 justify-content-center">
+                        <p class="text-center">${data[i].email}</p>
+                    </div>
+                    <div class="col-lg-2 col-xs-12">
+                        <p class="text-center">${data[i].first_name}</p>
+                    </div>
+                    <div class="col-lg-2 col-xs-12">
+                        <p class="text-center">${data[i].last_name}</p>
+                    </div>
+                    <div class="col-lg-4 col-xs-12">
+                        <img class="rounded-circle" src=${data[i].avatar}>
+                    </div>
+                </div>`
+    }
+    document.getElementById("body").innerHTML = body;
 }
 
 //Guardar datos localmente:
